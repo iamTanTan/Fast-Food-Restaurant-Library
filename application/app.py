@@ -1,11 +1,12 @@
 from flask import Flask, render_template
+import os
 import psycopg2
 from credentials import DB_URL
 
 app = Flask(__name__)
 
 if not DB_URL:
-    DB_URL = DATABASE_URL
+    DB_URL = os.eviron['DATABASE_URL']
 
 def get_db_connection():
     conn = psycopg2.connect(DB_URL)
