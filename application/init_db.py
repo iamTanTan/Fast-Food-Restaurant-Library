@@ -2,7 +2,7 @@ import os
 import psycopg2
 
 from credentials import DB_URL
-
+DB_URL = 'postgresql://localhost/fastfood_db'
 conn = psycopg2.connect(DB_URL)
 
 # Open a cursor to perform database operations
