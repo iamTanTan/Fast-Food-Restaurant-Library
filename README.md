@@ -120,12 +120,12 @@ To get a local copy up and running follow these simple example steps.
 
 This shows the steps after the initial set up to run the application
 
-    ```sh
-    # in the root directory
-    venv/Scripts/activate
-    cd application
-    python app.py
-    ```
+```sh
+# in the root directory
+venv/Scripts/activate
+cd application
+python app.py
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
