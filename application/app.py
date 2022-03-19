@@ -6,8 +6,9 @@ from credentials import DB_URL
 app = Flask(__name__)
 
 # set os variable locally
-# app.config['DB_URL'] = DB_URL
-app.config['DB_URL'] = "postgresql://localhost/fastfood_db"
+#app.config['DB_URL'] = "postgresql://localhost/fastfood_db"
+app.config['DB_URL'] = DB_URL
+
 print(app.config)
 
 def get_db_connection():
