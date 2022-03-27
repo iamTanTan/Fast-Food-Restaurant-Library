@@ -1,10 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{% block title %} Books {% endblock %}</h1>
-{% for book in books %}
-<div class="book">
-    <h3>#{{ book[0] }} - {{ book[1] }} BY {{ book[2] }}</h3>
-    <i><p>({{ book[3] }} pages)</p></i>
-    <p class="review">{{ book[4] }}</p>
-    <i><p>Added {{ book[5] }}</p></i>
+<h1>{% block title %} Restaurants {% endblock %}</h1>
+{% for r in restaurants %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="restaurants card shadow my-4">
+            <h3>Name: {{r[1]}}</h3>
+            <h4>Location: {{r[2]}}</h4>
+            <h4>Type: {{r[3]}}</h4>
+            <h4>Price: {{r[4]}}</h4>
+            <button class="btn btn-block btn-success" href="#">
+                See Menu and More
+            </button>
+        </div>
+    </div>
 </div>
 {% endfor %} {% endblock %}
