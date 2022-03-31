@@ -71,7 +71,7 @@ To get a local copy up and running follow these simple example steps.
     ```
 3. Create a virtual environment for your current python packages
     ```sh
-    cd cd .\Fast-Food-Restaurant-Library\
+    cd .\Fast-Food-Restaurant-Library\
     pip install virtualenv
     virtualenv venv
     ```
