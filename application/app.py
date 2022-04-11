@@ -45,8 +45,10 @@ def restaurant_detail(id):
     return render_template('menus.html', menus = menus)
 
 # POST REQUEST handling to create a restaurant
-@app.route('/create_restaurant', methods=['POST'])
+@app.route('/create_restaurant', methods=['POST', 'GET'])
 def create_restaurant():
+    if request.method == 'GET':
+        return render_template('create_restaurant.html')
     # "grab" the data from the form
     if request.method == 'POST':
         name = request.form['name']

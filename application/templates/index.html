@@ -1,15 +1,25 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{% block title %} Restaurants {% endblock %}</h1>
-<a href="#create" class="btn btn-light btn-sm">Add restaurant</a>
+<h1 class="d-flex justify-content-center">
+    {% block title %} Restaurants {% endblock %}
+</h1>
+
+<a
+    href="./create_restaurant"
+    class="d-flex justify-content-end btn btn-light btn-sm"
+    >Add restaurant</a
+>
+<hr />
 {% for r in restaurants %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="restaurants card shadow my-4">
             <div class="card-body">
-                <h3>Name: {{r[1]}}</h3>
-                <h4>Location: {{r[2]}}</h4>
-                <h4>Type: {{r[3]}}</h4>
-                <h4>Price: {{r[4]}}</h4>
+                <div class="card-title"><h2>{{r[1]}}</h2></div>
+                <div class="card-text">
+                    <h4>Location: {{r[2]}}</h4>
+                    <h4>Type: {{r[3]}}</h4>
+                    <h4>Price: {{r[4]}}</h4>
+                </div>
                 <div class="d-flex justify-content-between">
                     <a
                         class="btn btn-sm btn-success"
@@ -30,34 +40,4 @@
         </div>
     </div>
 </div>
-{% endfor %}
-<!-- Create Restaurant section POST REQUEST DEMO  -->
-<div id="create" class="offset-2 col-lg-8">
-    <h2>Create Restaurant</h2>
-    <p class="text-danger">
-        {% with messages = get_flashed_messages() %} {% if messages %} {% for
-        message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
-        %}
-    </p>
-
-    <p></p>
-
-    <form action="./create_restaurant" method="post">
-        <p>Enter Name:</p>
-        <p><input type="text" name="name" class="form-control" /></p>
-        <p>Enter Location:</p>
-        <p><input type="text" name="location" class="form-control" /></p>
-        <p>Enter Restaurant Type:</p>
-        <p><input type="text" name="type" class="form-control" /></p>
-        <p>Enter Price Range (low or medium or high):</p>
-        <p><input type="text" name="price" class="form-control" /></p>
-        <p>
-            <input
-                type="submit"
-                value="Create Restaurant"
-                class="btn btn-success mt-4"
-            />
-        </p>
-    </form>
-</div>
-{% endblock %}
+{% endfor %} {%endblock%}
