@@ -9,16 +9,21 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
-    <body class="container-fluid">
+    <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="{{ url_for('index') }}"
-                >Fast-Food Restaurant Library</a
-            >
-            <a class="navbar-link" href="#">About</a>
+            <div class="container-fluid">
+                <a class="pl-2 navbar-brand" href="{{ url_for('index') }}"
+                    >Fast-Food Restaurant Library</a
+                >
+                <a class="navbar-link" href="#">About</a>
+            </div>
         </nav>
-        <hr />
-        <div class="content">{% block content %} {% endblock %}</div>
+
+        <div class="container-fluid content">
+            {% block content %} {% endblock %}
+        </div>
     </body>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
