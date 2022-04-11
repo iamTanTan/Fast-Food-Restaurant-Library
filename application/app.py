@@ -74,6 +74,22 @@ def create_restaurant():
 
     return redirect('/')
 
+# post route to delete a restaurant
+@app.route('/delete_restaurant', methods=['POST'])
+def delete_restaurant():
+    if request.method == 'POST':
+        id = request.form['id']
+        print(id)
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM fast_food_restaurant WHERE id = %s', (id,))
+        cur.close()
+        conn.close()
+
+    return redirect('/')
+
+
+
 
 
 if __name__ == '__main__':

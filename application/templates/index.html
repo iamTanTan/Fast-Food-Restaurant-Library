@@ -5,16 +5,28 @@
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="restaurants card shadow my-4">
-            <h3>Name: {{r[1]}}</h3>
-            <h4>Location: {{r[2]}}</h4>
-            <h4>Type: {{r[3]}}</h4>
-            <h4>Price: {{r[4]}}</h4>
-            <a
-                class="btn btn-block btn-success"
-                href="./restaurant/{{r[0]}}/menus"
-            >
-                See Menu and More
-            </a>
+            <div class="card-body">
+                <h3>Name: {{r[1]}}</h3>
+                <h4>Location: {{r[2]}}</h4>
+                <h4>Type: {{r[3]}}</h4>
+                <h4>Price: {{r[4]}}</h4>
+                <div class="d-flex justify-content-between">
+                    <a
+                        class="btn btn-sm btn-success"
+                        href="./restaurant/{{r[0]}}/menus"
+                    >
+                        See Menu and More
+                    </a>
+                    <form action="./delete_restaurant" method="post">
+                        <input name="id" value="{{r[0]}}" type="hidden" />
+                        <input
+                            class="btn btn-danger"
+                            type="submit"
+                            value="Delete Restaurant"
+                        />
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -40,7 +52,11 @@
         <p>Enter Price Range (low or medium or high):</p>
         <p><input type="text" name="price" class="form-control" /></p>
         <p>
-            <input type="submit" value="submit" class="btn btn-success mt-4" />
+            <input
+                type="submit"
+                value="Create Restaurant"
+                class="btn btn-success mt-4"
+            />
         </p>
     </form>
 </div>
