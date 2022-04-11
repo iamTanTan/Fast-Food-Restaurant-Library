@@ -17,9 +17,12 @@
 
                 <p></p>
 
+                <!-- We have a post request to our ./create_restaurant endpoint -->
+                <!-- the function on the backend is executed in response to a submit -->
                 <form action="./create_restaurant" method="post">
                     <p>Enter Name:</p>
                     <p>
+                        <!-- We just need to add an input for each field -->
                         <input type="text" name="name" class="form-control" />
                     </p>
                     <p>Enter Location:</p>
@@ -39,6 +42,7 @@
                         <input type="text" name="price" class="form-control" />
                     </p>
                     <p>
+                        <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input
                             type="submit"
                             value="Create Restaurant"

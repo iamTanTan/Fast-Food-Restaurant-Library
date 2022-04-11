@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Menus {% endblock %}</h1>
+<!-- iterate over menu result set and display info -->
 {% for m in menus %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card shadow my-4">
             <h4>Type: {{m[2]}}</h4>
-
+            <!-- this a has a hyper-link to the menu detail page -->
             <a class="btn btn-block btn-success" href="./menus/{{m[0]}}">
                 See Food Items on Menu
             </a>

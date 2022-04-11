@@ -5,8 +5,7 @@ from credentials import DB_URL
 
 app = Flask(__name__)
 
-# set os variable locally
-#app.config['DB_URL'] = "postgresql://localhost/fastfood_db"
+# YOU NEED TO ADD THE credentials.py file from google drive
 app.config['DB_URL'] = DB_URL
 app.config['SECRET_KEY'] = 'asldfkhalsdr9023875934etQAR93123BEIAWUGAFVBEA9ERTHQP4'
 
