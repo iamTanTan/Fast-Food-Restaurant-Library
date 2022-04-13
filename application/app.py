@@ -110,8 +110,69 @@ def delete_restaurant():
 
     return redirect('/')
 
+# UNIMPLEMENTED
+#
+# PROBABLY MISSING SOME CURRENTLY
+#
+@app.route('/menu/<int:id>', methods=['GET'])
+def menu_detail(id):
+    return "Add Stuff like food items on the menu"
 
+@app.route('/create_food_item', methods=['POST', 'GET'])
+def create_food_item():
+    if request.method == 'POST':
+        return "yo"
+    elif request.method == 'GET':
+        return "ye"
+    else:
+        return "invalid"
 
+@app.route('/create_menu', methods=['POST'])
+def create_menu():
+    if request.method == 'POST':
+        return "do stuff"
+    
+    return redirect('/')
+
+@app.route('/create_review', methods=['POST', 'GET'])
+def create_review():
+    if request.method == 'POST':
+        return "yo"
+    elif request.method == 'GET':
+        return "ye"
+    else:
+        return "invalid"
+
+# this was a copy paste from restaurant delete with tiny renames
+@app.route('/delete_menu', methods=['POST'])
+def delete_menu():
+    if request.method == 'POST':
+        # grab the id from the request.form information
+        id = request.form['id']
+        print(id)
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM menu WHERE id = %s', (id,))
+        cur.close()
+        conn.close()
+
+    return redirect('/')
+
+@app.route('/delete_food_item', methods=['POST'])
+def delete_food_item():
+    if request.method == 'POST':
+        # grab the id from the request.form information
+        id = request.form['id']
+        print(id)
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM food_item WHERE id = %s', (id,))
+        cur.close()
+        conn.close()
+
+    return redirect('/')
+
+    
 
 
 if __name__ == '__main__':
