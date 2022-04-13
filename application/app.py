@@ -34,14 +34,28 @@ def index():
 def restaurant_detail(id):
     conn = get_db_connection()
     cur = conn.cursor()
+    # get menus for restaurant
     cur.execute('SELECT * FROM menu WHERE fast_food_restaurant_id = %s', \
         (id,))
     menus = cur.fetchall()
-    print(menus)
+    # get reviews for restaurant
+    cur.execute('SELECT * FROM review WHERE fast_food_restaurant_id = %s', \
+        (id,))
+    reviews = cur.fetchall()
+    #get hours for restaurant
+    cur.execute('SELECT * FROM hours WHERE fast_food_restaurant_id = %s', \
+        (id,))
+    hours = cur.fetchall()
     cur.close()
     conn.close()
 
-    return render_template('menus.html', menus = menus)
+    context = {
+        "menus": menus,
+        "hours": hours,
+        "reviews": reviews
+    }
+
+    return render_template('restaurant_detail.html', context=context)
 
 # POST REQUEST handling to create a restaurant
 @app.route('/create_restaurant', methods=['POST', 'GET'])
@@ -76,9 +90,11 @@ def create_restaurant():
     return redirect('/')
 
 # post route to delete a restaurant
+# see form action on index.html and input with name="id"
 @app.route('/delete_restaurant', methods=['POST'])
 def delete_restaurant():
     if request.method == 'POST':
+        # grab the id from the request.form information
         id = request.form['id']
         print(id)
         conn = get_db_connection()

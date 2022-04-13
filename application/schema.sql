@@ -48,7 +48,7 @@ INSERT INTO fast_food_restaurant VALUES (
 );
 
 INSERT INTO review VALUES (
-	1, 1, 'Tiffany Day', 'micky D has pretty solid fries…', 4
+	1, 1, 'Tiffany Day', 'micky D has pretty solid fries!', 4
 );
 
 INSERT INTO review VALUES (

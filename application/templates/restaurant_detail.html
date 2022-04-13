@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{% block title %} Restaurant Detail {% endblock %}</h1>
+<!-- iterate over menu result set and display info -->
+<div class="row justify-content-around">
+    {% for m in context.menus %}
+    <div class="col-lg-4">
+        <div class="card shadow my-4">
+            <div class="card-body">
+                <h4>Type: {{m[2]}}</h4>
+                <!-- this a has a hyper-link to the menu detail page -->
+                <a class="btn btn-block btn-success" href="./menus/{{m[0]}}">
+                    See Food Items on Menu
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!--display hours-->
+    <div class="col-lg-4">
+        <div class="card shadow my-4">
+            <div class="card-body">
+                <div class="card-title"><h2>Hours</h2></div>
+                {% for h in context.hours %}
+                <h4>{{h[0]}}: {{h[1]}} - {{h[2]}}</h4>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!--display reviews-->
+    <div class="col-lg-4">
+        <div class="card shadow my-4">
+            <div class="card-body">
+                <div class="card-title"><h2>Reviews</h2></div>
+                {% for r in context.reviews%}
+                <div class="mt-4">
+                    <h4>Reviewer: {{r[2]}}</h4>
+                    <h4>Rating: {{r[4]}}</h4>
+                    <h4>Review: {{r[3]}}</h4>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
