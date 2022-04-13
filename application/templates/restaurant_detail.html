@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+<!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
+{% extends 'base.html' %}
+<!--Include navbar-->
+{% block navbar %} {% include 'navbar.html' %} {% endblock %}
+<!--Content-->
+{% block content %}
 <h1>{% block title %} Restaurant Detail {% endblock %}</h1>
 <!-- iterate over menu result set and display info -->
 <div class="row justify-content-around">
@@ -8,9 +13,24 @@
             <div class="card-body">
                 <h4>Type: {{m[2]}}</h4>
                 <!-- this a has a hyper-link to the menu detail page -->
-                <a class="btn btn-block btn-success" href="./menus/{{m[0]}}">
-                    See Food Items on Menu
-                </a>
+                <div class="d-flex justify-content-between">
+                    <a
+                        class="btn btn-block btn-success"
+                        href="./menus/{{m[0]}}"
+                    >
+                        See Food Items on Menu
+                    </a>
+                    <!-- form to create a post request to the delete menu endpoint -->
+                    <!-- Will take the id and pass it to the backend function for deletion process -->
+                    <form action="./delete_menu" method="post">
+                        <input name="id" value="{{m[0]}}" type="hidden" />
+                        <input
+                            class="btn btn-danger"
+                            type="submit"
+                            value="Delete"
+                        />
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -31,6 +51,8 @@
         <div class="card shadow my-4">
             <div class="card-body">
                 <div class="card-title"><h2>Reviews</h2></div>
+                <h5>Average Rating {{ context.average_rating[0] }}</h5>
+                <hr />
                 {% for r in context.reviews%}
                 <div class="mt-4">
                     <h4>Reviewer: {{r[2]}}</h4>

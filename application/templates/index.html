@@ -1,5 +1,11 @@
 <!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+<!--Include navbar-->
+{% block navbar %} {% with seachbar={"val": true} %}{% include 'navbar.html'%}
+{%endwith%}{% endblock %}
+<!--Content-->
+{% block content %}
+
 <!-- This is just some styling and heading stuff for the page-->
 <h1 class="d-flex justify-content-center">
     {% block title %} Restaurants {% endblock %}

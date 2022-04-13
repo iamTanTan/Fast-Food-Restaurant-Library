@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-success">
+    <div class="container-fluid">
+        <a class="pl-2 navbar-brand" href="{{ url_for('index') }}"
+            >Fast-Food Restaurant Library</a
+        >
+        {% if seachbar %}
+        <form action="./search" method="post" class="d-flex">
+            <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        {% else %} {% endif %}
+    </div>
+</nav>

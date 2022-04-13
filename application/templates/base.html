@@ -12,15 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-success">
-            <div class="container-fluid">
-                <a class="pl-2 navbar-brand" href="{{ url_for('index') }}"
-                    >Fast-Food Restaurant Library</a
-                >
-                <a class="navbar-link" href="#">About</a>
-            </div>
-        </nav>
-
+        {% block navbar %} {% endblock %}
         <div class="container-fluid content">
             {% block content %} {% endblock %}
         </div>

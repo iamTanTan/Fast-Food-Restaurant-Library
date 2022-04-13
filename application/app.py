@@ -42,6 +42,10 @@ def restaurant_detail(id):
     cur.execute('SELECT * FROM review WHERE fast_food_restaurant_id = %s', \
         (id,))
     reviews = cur.fetchall()
+    # get average rating
+    cur.execute('SELECT AVG(rating) FROM review WHERE fast_food_restaurant_id = %s', \
+        (id,))
+    average_rating = cur.fetchone()
     #get hours for restaurant
     cur.execute('SELECT * FROM hours WHERE fast_food_restaurant_id = %s', \
         (id,))
@@ -52,7 +56,8 @@ def restaurant_detail(id):
     context = {
         "menus": menus,
         "hours": hours,
-        "reviews": reviews
+        "reviews": reviews,
+        "average_rating": average_rating
     }
 
     return render_template('restaurant_detail.html', context=context)
