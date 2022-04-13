@@ -1,7 +1,7 @@
 <!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
 {% extends 'base.html' %}
 <!--Include navbar-->
-{% block navbar %} {% include 'navbar.html' %} {% endblock %}
+{% block navbar %} {% include 'fragments/navbar.html' %} {% endblock %}
 <!--Content-->
 {% block content %}
 <h1>{% block title %} Restaurant Detail {% endblock %}</h1>

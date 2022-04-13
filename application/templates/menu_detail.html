@@ -1,0 +1,10 @@
+<!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
+{% extends 'base.html' %}
+<!--Include navbar-->
+{% block navbar %} {% include 'fragments/navbar.html' %} {% endblock %}
+<!--Content-->
+{% block content %}
+<h1>{% block title %} Menu Detail {% endblock %}</h1>
+<!-- iterate over menu result set and display info -->
+
+{% endblock %}

@@ -1,8 +1,8 @@
 <!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
 {% extends 'base.html' %}
 <!--Include navbar-->
-{% block navbar %} {% with seachbar={"val": true} %}{% include 'navbar.html'%}
-{%endwith%}{% endblock %}
+{% block navbar %} {% with seachbar={"val": true} %}{% include
+'fragments/navbar.html'%} {%endwith%}{% endblock %}
 <!--Content-->
 {% block content %}
 

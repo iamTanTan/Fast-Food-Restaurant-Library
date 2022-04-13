@@ -5,15 +5,15 @@
 <!--Content-->
 {% block content %}
 <h1 class="d-flex justify-content-center">
-    {% block title %} Restaurants {% endblock %}
+    {% block title %} Food Item {% endblock %}
 </h1>
 
-<!-- Create Restaurant section POST REQUEST DEMO  -->
+<!-- Create Food Item section POST REQUEST DEMO  -->
 <div id="create">
     <div class="row justify-content-center">
-        <div class="col-lg-8 restaurants card shadow my-4">
+        <div class="col-lg-8 card shadow my-4">
             <div class="card-body">
-                <h2>Create Restaurant</h2>
+                <h2>Create Food Item</h2>
                 <p class="text-danger">
                     {% with messages = get_flashed_messages() %} {% if messages
                     %} {% for message in messages %} {{ message }} {% endfor %}
@@ -22,9 +22,9 @@
 
                 <p></p>
 
-                <!-- We have a post request to our ./create_restaurant endpoint -->
+                <!-- We have a post request to our ./create_food_item endpoint -->
                 <!-- the function on the backend is executed in response to a submit -->
-                <form action="./create_restaurant" method="post">
+                <form action="./create_food_item" method="post">
                     <p>Enter Name:</p>
                     <p>
                         <!-- We just need to add an input for each field -->
@@ -50,7 +50,7 @@
                         <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input
                             type="submit"
-                            value="Create Restaurant"
+                            value="Create Fooditem"
                             class="btn btn-success mt-4"
                         />
                     </p>
