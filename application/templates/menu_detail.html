@@ -4,7 +4,18 @@
 {% block navbar %} {% include 'fragments/navbar.html' %} {% endblock %}
 <!--Content-->
 {% block content %}
-<h1>{% block title %} Menu Detail {% endblock %}</h1>
-<!-- iterate over menu result set and display info -->
+<h1 class="d-flex justify-content-center">
+    {% block title %} Menu Detail {% endblock %}
+</h1>
+<!-- iterate over food items result set and display info -->
 
-{% endblock %}
+{% for f in food_items %}
+<div class="col-lg-4">
+    <div class="card shadow my-4">
+        <div class="card-body">
+            <h4>Name: {{f[2]}}</h4>
+            <h5>Price: ${{f[3]}}</h5>
+        </div>
+    </div>
+</div>
+{% endfor %} {% endblock %}

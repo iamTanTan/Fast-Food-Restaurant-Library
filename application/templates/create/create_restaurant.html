@@ -5,13 +5,13 @@
 <!--Content-->
 {% block content %}
 <h1 class="d-flex justify-content-center">
-    {% block title %} Menu {% endblock %}
+    {% block title %} Restaurants {% endblock %}
 </h1>
 
 <!-- Create Restaurant section POST REQUEST DEMO  -->
 <div id="create">
     <div class="row justify-content-center">
-        <div class="col-lg-8 Menu card shadow my-4">
+        <div class="col-lg-8 restaurants card shadow my-4">
             <div class="card-body">
                 <h2>Create Restaurant</h2>
                 <p class="text-danger">
@@ -24,28 +24,32 @@
 
                 <!-- We have a post request to our ./create_restaurant endpoint -->
                 <!-- the function on the backend is executed in response to a submit -->
-                <form action="./create_restaurant" method="post">
-                    <p>Enter Name:</p>
+                <form
+                    action="./create_restaurant"
+                    method="post"
+                    class="form-group"
+                >
+                    {{ form.csrf_token }}
                     <p>
-                        <!-- We just need to add an input for each field -->
-                        <input type="text" name="name" class="form-control" />
+                        {{ form.name.label }}
+                        {{form.name(class="form-control")}}
                     </p>
-                    <p>Enter Location:</p>
+
                     <p>
-                        <input
-                            type="text"
-                            name="location"
-                            class="form-control"
-                        />
+                        {{ form.location.label }}
+                        {{form.location(class="form-control")}}
                     </p>
-                    <p>Enter Restaurant Type:</p>
+
                     <p>
-                        <input type="text" name="type" class="form-control" />
+                        {{ form.rtype.label }}
+                        {{form.rtype(class="form-control")}}
                     </p>
-                    <p>Enter Price Range (low or medium or high):</p>
+
                     <p>
-                        <input type="text" name="price" class="form-control" />
+                        {{ form.price.label }}
+                        {{form.price(class="form-control")}}
                     </p>
+
                     <p>
                         <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input

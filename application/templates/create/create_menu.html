@@ -1,0 +1,40 @@
+<!-- This wraps the content with the base.html data (just add this to each html no need to dive into it)-->
+{% extends 'base.html' %}
+<!--Include navbar-->
+{% block navbar %} {% include 'fragments/navbar.html' %}{% endblock %}
+<!--Content-->
+{% block content %}
+<h1 class="d-flex justify-content-center">
+    {% block title %} Menu {% endblock %}
+</h1>
+
+<!-- Create Restaurant section POST REQUEST DEMO  -->
+<div id="create">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 Menu card shadow my-4">
+            <div class="card-body">
+                <h2>Create Menu</h2>
+
+                <!-- We have a post request to our ./create_menu endpoint -->
+                <!-- the function on the backend is executed in response to a submit -->
+                <form action="./create_restaurant" method="post">
+                    {{ form.csrf_token }}
+                    <p>
+                        {{ form.type.label }}
+                        {{form.type(class="form-control")}}
+                    </p>
+
+                    <p>
+                        <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
+                        <input
+                            type="submit"
+                            value="Create Menu"
+                            class="btn btn-success mt-4"
+                        />
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

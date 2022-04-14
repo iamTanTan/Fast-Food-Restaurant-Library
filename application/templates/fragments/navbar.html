@@ -1,13 +1,14 @@
-<nav class="navbar navbar-dark bg-success">
+<nav class="navbar navbar-dark bg-success mb-2">
     <div class="container-fluid">
         <a class="pl-2 navbar-brand" href="{{ url_for('index') }}"
             >Fast-Food Restaurant Library</a
         >
         {% if seachbar %}
-        <form action="./search" method="post" class="d-flex">
+        <form action="/" method="post" class="d-flex">
             <input
                 class="form-control me-2"
                 type="search"
+                name="query"
                 placeholder="Search"
                 aria-label="Search"
             />

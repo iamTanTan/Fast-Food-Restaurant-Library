@@ -14,43 +14,26 @@
         <div class="col-lg-8 card shadow my-4">
             <div class="card-body">
                 <h2>Create Food Item</h2>
-                <p class="text-danger">
-                    {% with messages = get_flashed_messages() %} {% if messages
-                    %} {% for message in messages %} {{ message }} {% endfor %}
-                    {% endif %} {% endwith %}
-                </p>
-
-                <p></p>
 
                 <!-- We have a post request to our ./create_food_item endpoint -->
                 <!-- the function on the backend is executed in response to a submit -->
                 <form action="./create_food_item" method="post">
-                    <p>Enter Name:</p>
+                    {{ form.csrf_token }}
                     <p>
-                        <!-- We just need to add an input for each field -->
-                        <input type="text" name="name" class="form-control" />
+                        {{ form.name.label }}
+                        {{form.name(class="form-control")}}
                     </p>
-                    <p>Enter Location:</p>
+
                     <p>
-                        <input
-                            type="text"
-                            name="location"
-                            class="form-control"
-                        />
+                        {{ form.price.label }}
+                        {{form.price(class="form-control")}}
                     </p>
-                    <p>Enter Restaurant Type:</p>
-                    <p>
-                        <input type="text" name="type" class="form-control" />
-                    </p>
-                    <p>Enter Price Range (low or medium or high):</p>
-                    <p>
-                        <input type="text" name="price" class="form-control" />
-                    </p>
+
                     <p>
                         <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input
                             type="submit"
-                            value="Create Fooditem"
+                            value="Add Food"
                             class="btn btn-success mt-4"
                         />
                     </p>
