@@ -19,6 +19,7 @@ def close_db_connection(conn, cur):
     cur.close()
     conn.close()
 
+##################################################################################################
 # ALL OF THE FOLLOWING ARE WORKING ROUTES (see below for unimplemented functions etc.)
 
 #  This defines an endpoint for a url. Homepage 
@@ -146,7 +147,7 @@ def delete_food_item():
 
     return redirect('/')
 
-#####################################################################################
+###########################################################################################################################
 # UNIMPLEMENTED
 #
 # PROBABLY MISSING SOME CURRENTLY
@@ -196,17 +197,17 @@ def create_hours(restaurant_id):
 # EDIT ROUTES are the same as create but with the forms pre populated
 @app.route('/restaurant/<int:restaurant_id>/edit_hours', methods=['POST', 'GET'])
 def edit_hours(restaurant_id):
-
-  
+    form = HoursForm()
     # get data to prepopulate form
-    conn = get_db_connection()
-    cur = conn.cursor()
-    day_of_week = request.form['day_of_week']
-    cur.execute('SELECT * FROM hours WHERE day_of_week = %s AND fast_food_restaurant_id = %s', (day_of_week, restaurant_id))
-    hour = cur.fetchone()
-    close_db_connection(conn, cur)
+    if request.method == 'GET':
+        conn = get_db_connection()
+        cur = conn.cursor()
+        day_of_week = request.form['day_of_week']
+        cur.execute('SELECT * FROM hours WHERE day_of_week = %s AND fast_food_restaurant_id = %s', (day_of_week, restaurant_id))
+        hour = cur.fetchone()
+        close_db_connection(conn, cur)
             
-    form = HoursForm(data = {'previous_day':hour[0], 'day_of_week':day_of_week, 'open_time':hour[1], 'close_time':hour[2]})
+        form = HoursForm(data = {'previous_day':day_of_week, 'day_of_week':day_of_week, 'open_time':hour[1], 'close_time':hour[2]})
 
     if form.validate_on_submit():
         # add update sql stuff based on pervious day and restaurant id
@@ -215,6 +216,6 @@ def edit_hours(restaurant_id):
 
     return render_template('edit/edit_hours.html', form=form)
 
-
+###########################################################################################################################
 if __name__ == '__main__':
     app.run(debug=True)
