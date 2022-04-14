@@ -1,5 +1,5 @@
 
-CREATE TABLE fast_food_restaurant (
+CREATE TABLE IF NOT EXISTS fast_food_restaurant (
 	id integer,
 	name text,
 	location text,
@@ -8,7 +8,7 @@ CREATE TABLE fast_food_restaurant (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE review (
+CREATE TABLE IF NOT EXISTS review (
 	id integer,
 	fast_food_restaurant_id integer not null,
 	reviewer_name text not null,
@@ -18,14 +18,14 @@ CREATE TABLE review (
     FOREIGN KEY(fast_food_restaurant_id) REFERENCES fast_food_restaurant(id) ON DELETE CASCADE
 );
 
-CREATE TABLE menu (
+CREATE TABLE IF NOT EXISTS menu (
 	id integer, 
     fast_food_restaurant_id integer,
     menu_type text,
     PRIMARY KEY(id),
     FOREIGN KEY (fast_food_restaurant_id) REFERENCES fast_food_restaurant(id) ON DELETE CASCADE
 );
-CREATE TABLE food_item (
+CREATE TABLE IF NOT EXISTS food_item (
 	id integer,
 	name text not null,
 	price real not null,
@@ -34,7 +34,7 @@ CREATE TABLE food_item (
 	FOREIGN KEY (menu_id) REFERENCES menu(id) ON DELETE CASCADE
 );
 
-CREATE TABLE hours (
+CREATE TABLE IF NOT EXISTS hours (
 	day_of_week text not null,
 	open_time time not null,
 	close_time time not null,

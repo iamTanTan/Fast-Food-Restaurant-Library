@@ -15,6 +15,31 @@
         <div class="card-body">
             <h4>Name: {{f[2]}}</h4>
             <h5>Price: ${{f[3]}}</h5>
+            <div class="d-flex justify-content-around">
+                <form action="./edit_food_item" method="post">
+                    <input
+                        type="hidden"
+                        name="id"
+                        class="form-control"
+                        value="{{f[0]}}"
+                    />
+                    <input
+                        class="btn btn-light"
+                        type="submit"
+                        name="edit"
+                        value="edit"
+                    />
+                </form>
+                <form action="./delete_food_item" method="post">
+                    <input type="hidden" name="id" value="{{f[0]}}" />
+                    <input
+                        class="btn btn-danger"
+                        type="submit"
+                        name="delete"
+                        value="delete"
+                    />
+                </form>
+            </div>
         </div>
     </div>
 </div>

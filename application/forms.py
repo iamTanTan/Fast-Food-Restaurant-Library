@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, FloatField, BooleanField,
-                     RadioField, SelectField)
+from wtforms import (StringField, TextAreaField, FloatField, TimeField, SelectField)
 from wtforms.validators import InputRequired, Length
 
 class RestaurantForm(FlaskForm):
@@ -20,3 +19,9 @@ class MenuForm(FlaskForm):
 class FoodItemForm(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
     price = FloatField('Price',validators=[InputRequired()], description="Enter decimal value without $ sign")
+
+class HoursForm(FlaskForm):
+    previous_day = StringField('Previous Day')
+    day_of_week = SelectField('Weekday', choices=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    open_time = TimeField('Start Time', validators=[InputRequired()])
+    close_time = TimeField('Close Time', validators=[InputRequired()])

@@ -10,7 +10,7 @@
 </h1>
 
 <a
-    href="/create_menu"
+    href="./create_menu"
     class="d-flex justify-content-center btn btn-light btn-sm"
     >Add menu</a
 >
@@ -55,9 +55,18 @@
                 <div class="d-flex justify-content-between mt-4">
                     <h4>{{h[0]}}: {{h[1]}} - {{h[2]}}</h4>
                     <div>
-                        <a href="./create_hours" class="btn btn-block btn-light"
-                            >edit</a
-                        >
+                        <form action="./edit_hours" method="post">
+                            <input
+                                type="hidden"
+                                name="day_of_week"
+                                value="{{h[0]}}"
+                            />
+                            <input
+                                type="submit"
+                                class="btn btn-block btn-light"
+                                value="edit"
+                            />
+                        </form>
                     </div>
                 </div>
                 {% endfor %}

@@ -5,30 +5,40 @@
 <!--Content-->
 {% block content %}
 <h1 class="d-flex justify-content-center">
-    {% block title %} Menu {% endblock %}
+    {% block title %} Hours {% endblock %}
 </h1>
 
-<!-- Create Restaurant section POST REQUEST DEMO  -->
+<!-- Create Food Item section POST REQUEST DEMO  -->
 <div id="create">
     <div class="row justify-content-center">
-        <div class="col-lg-8 Menu card shadow my-4">
+        <div class="col-lg-8 card shadow my-4">
             <div class="card-body">
-                <h2>Create Menu</h2>
+                <h2>Add Open Hours</h2>
 
-                <!-- We have a post request to our ./create_menu endpoint -->
+                <!-- We have a post request to our ./create_food_item endpoint -->
                 <!-- the function on the backend is executed in response to a submit -->
-                <form action="./create_menu" method="post">
+                <form action="./create_hours" method="post">
                     {{ form.csrf_token }}
                     <p>
-                        {{ form.menu_type.label }}
-                        {{form.menu_type(class="form-control")}}
+                        {{ form.day_of_week.label }}
+                        {{form.day_of_week(class="form-control")}}
+                    </p>
+
+                    <p>
+                        {{ form.open_time.label }}
+                        {{form.open_time(class="form-control")}}
+                    </p>
+
+                    <p>
+                        {{ form.close_time.label }}
+                        {{form.close_time(class="form-control")}}
                     </p>
 
                     <p>
                         <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input
                             type="submit"
-                            value="Create Menu"
+                            value="Add Open Hours"
                             class="btn btn-success mt-4"
                         />
                     </p>
