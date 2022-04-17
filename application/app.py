@@ -20,7 +20,7 @@ def close_db_connection(conn, cur):
     conn.close()
 
 ##################################################################################################
-# ALL OF THE FOLLOWING ARE WORKING ROUTES (see below for unimplemented functions etc.)
+# ALL OF THE FOLLOWING ARE WORKING ROUTES (see below this section for unimplemented functions etc.)
 
 #  This defines an endpoint for a url. Homepage 
 @app.route('/', methods=['GET', 'POST'])
@@ -79,6 +79,7 @@ def restaurant_detail(id):
 # POST REQUEST handling to create a restaurant
 @app.route('/create_restaurant', methods=['POST', 'GET'])
 def create_restaurant():
+    # create form entity
     form = RestaurantForm()
 
     # "grab" the data from the form on submit (method also checks for POST request)
@@ -98,7 +99,8 @@ def create_restaurant():
         (new_id, name, location, rtype, price))
         close_db_connection(conn, cur)
 
-        return redirect('/')
+        # redirect to another endpoint 
+        return redirect('/restaurant/' + str(new_id))
     
     return render_template('/create/create_restaurant.html', form=form)
 
@@ -152,9 +154,13 @@ def delete_food_item():
 #
 # PROBABLY MISSING SOME CURRENTLY
 #
+###################### Detail Pages ######################
+
 @app.route('/menu/<int:id>', methods=['GET'])
 def menu_detail(id):
     return "Display Stuff like food items on the menu_detail.html template"
+
+###################### Food Item ######################
 
 # displays the create food item html page with the form 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/create_food_item', methods=['POST', 'GET'])
@@ -165,6 +171,8 @@ def create_food_item(restaurant_id, menu_id):
         return redirect('/restaurant/' + str(restaurant_id))
     return render_template('create/create_food_item.html', form=form)
 
+###################### Menu ######################
+
 # displays the create menu html page with the form 
 @app.route('/restaurant/<int:restaurant_id>/create_menu', methods=['POST', 'GET'])
 def create_menu(restaurant_id):
@@ -173,6 +181,8 @@ def create_menu(restaurant_id):
         # do sql stuff
         return redirect('/restaurant/' + str(restaurant_id))
     return render_template('create/create_menu.html', form=form)
+
+###################### Review (no edit function needed) ######################
 
 # displays the create review html page with the form 
 @app.route('/restaurant/<int:restaurant_id>/create_review/', methods=['POST', 'GET'])
@@ -183,6 +193,8 @@ def create_review(restaurant_id):
         return redirect('/restaurant/' + str(restaurant_id))
     return render_template('create/create_review.html', form=form)
 
+###################### HOURS ######################
+
 # displays the create hours html page with the form 
 @app.route('/restaurant/<int:restaurant_id>/create_hours', methods=['POST', 'GET'])
 def create_hours(restaurant_id):
@@ -191,30 +203,29 @@ def create_hours(restaurant_id):
         # do sql create stuff
         print(form.open_time.data)
         return redirect('/restaurant/' + str(restaurant_id))
-    return render_template('create/create_hours.html', form=form)
+    return render_template('create/create_hours.html', form=form, heading="Add")
 
-# I DONT THINK THIS APPROACH WORKS LOL
 # EDIT ROUTES are the same as create but with the forms pre populated
-@app.route('/restaurant/<int:restaurant_id>/edit_hours', methods=['POST', 'GET'])
-def edit_hours(restaurant_id):
-    form = HoursForm()
-    # get data to prepopulate form
-    if request.method == 'GET':
-        conn = get_db_connection()
-        cur = conn.cursor()
-        day_of_week = request.form['day_of_week']
-        cur.execute('SELECT * FROM hours WHERE day_of_week = %s AND fast_food_restaurant_id = %s', (day_of_week, restaurant_id))
-        hour = cur.fetchone()
-        close_db_connection(conn, cur)
-            
-        form = HoursForm(data = {'previous_day':day_of_week, 'day_of_week':day_of_week, 'open_time':hour[1], 'close_time':hour[2]})
+@app.route('/restaurant/<int:restaurant_id>/edit_hours/<string:weekday>', methods=['POST', 'GET'])
+def edit_hours(restaurant_id, weekday):
+  
+    conn = get_db_connection()
+    cur = conn.cursor()
+    day_of_week = weekday
+    cur.execute('SELECT * FROM hours WHERE day_of_week = %s AND fast_food_restaurant_id = %s', (day_of_week, restaurant_id))
+    hour = cur.fetchone()
+    close_db_connection(conn, cur)
+        
+    # this is how we will prepopulate the data for our forms on the frontend
+    form = HoursForm(data = {'previous_day':day_of_week, 'day_of_week':day_of_week, 'open_time':hour[1], 'close_time':hour[2]})
 
     if form.validate_on_submit():
         # add update sql stuff based on pervious day and restaurant id
         print(form.previous_day.data)
+        print(form.day_of_week.data)
         return redirect('/restaurant/' + str(restaurant_id))
 
-    return render_template('edit/edit_hours.html', form=form)
+    return render_template('create/create_hours.html', form=form, heading="Edit")
 
 ###########################################################################################################################
 if __name__ == '__main__':

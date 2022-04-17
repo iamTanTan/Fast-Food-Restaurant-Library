@@ -55,18 +55,13 @@
                 <div class="d-flex justify-content-between mt-4">
                     <h4>{{h[0]}}: {{h[1]}} - {{h[2]}}</h4>
                     <div>
-                        <form action="./edit_hours" method="post">
-                            <input
-                                type="hidden"
-                                name="day_of_week"
-                                value="{{h[0]}}"
-                            />
-                            <input
-                                type="submit"
-                                class="btn btn-block btn-light"
-                                value="edit"
-                            />
-                        </form>
+                        <a
+                            href="./edit_hours/{{h[0]}}"
+                            class="btn btn-block btn-light"
+                            value="edit"
+                        >
+                            edit
+                        </a>
                     </div>
                 </div>
                 {% endfor %}

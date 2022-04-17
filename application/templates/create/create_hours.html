@@ -13,12 +13,16 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 card shadow my-4">
             <div class="card-body">
-                <h2>Add Open Hours</h2>
+                <h2>{{heading}} Open Hours</h2>
 
                 <!-- We have a post request to our ./create_food_item endpoint -->
                 <!-- the function on the backend is executed in response to a submit -->
+                {% if heading == "Add" %}
                 <form action="./create_hours" method="post">
-                    {{ form.csrf_token }}
+                {% elif heading == "Edit" %}
+                <form action="#" method="post">
+                {% endif %} 
+                {{ form.csrf_token }}
                     <p>
                         {{ form.day_of_week.label }}
                         {{form.day_of_week(class="form-control")}}
@@ -38,7 +42,7 @@
                         <!-- We need a submit btn to triger the form submission (POST request made onClick)-->
                         <input
                             type="submit"
-                            value="Add Open Hours"
+                            value="{{heading}} Open Hours"
                             class="btn btn-success mt-4"
                         />
                     </p>
