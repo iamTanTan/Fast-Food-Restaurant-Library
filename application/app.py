@@ -92,7 +92,9 @@ def create_restaurant():
         # create the data with psycopg2 here
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('SELECT COUNT(*) FROM fast_food_restaurant')
+        # Note: this is the wrong way to insert data. We should use a serial field so that we don't have two
+        # clients try to make the same insertion (id val) simultaneously (write conflict)
+        cur.execute('SELECT MAX(id) FROM fast_food_restaurant')
         new_id = cur.fetchone()[0] + 1
         print(new_id)
         cur.execute('INSERT INTO fast_food_restaurant VALUES (%s,  %s, %s, %s, %s)', 
@@ -155,20 +157,41 @@ def delete_food_item():
 # PROBABLY MISSING SOME CURRENTLY
 #
 ###################### Detail Pages ######################
+# DONE
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:id>', methods=['GET'])
+def menu_detail(restaurant_id, id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # get food for menu
+    cur.execute('SELECT * FROM food_item WHERE menu_id = %s', \
+        (id,))
+    food_items = cur.fetchall()
 
-@app.route('/menu/<int:id>', methods=['GET'])
-def menu_detail(id):
-    return "Display Stuff like food items on the menu_detail.html template"
+    return render_template('menu_detail.html', food_items=food_items)
 
 ###################### Food Item ######################
-
+#DONE 
 # displays the create food item html page with the form 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/create_food_item', methods=['POST', 'GET'])
 def create_food_item(restaurant_id, menu_id):
     form = FoodItemForm()
     if form.validate_on_submit():
+        price = form.price.data
+        name = form.name.data
+        print(price)
+        print(name)
+
         # do sql stuff
-        return redirect('/restaurant/' + str(restaurant_id))
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('SELECT MAX(id) FROM food_item;')
+        new_id = cur.fetchone()[0] + 1
+        print(new_id)
+        cur.execute('INSERT INTO food_item VALUES (%s,  %s, %s, %s)', 
+        (new_id, name, price, menu_id))
+        close_db_connection(conn, cur)
+
+        return redirect('/restaurant/' + str(restaurant_id) + "/menu/" + str(menu_id))
     return render_template('create/create_food_item.html', form=form)
 
 ###################### Menu ######################
