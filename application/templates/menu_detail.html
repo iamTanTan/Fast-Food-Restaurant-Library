@@ -9,13 +9,13 @@
 </h1>
 
 <a
-    href="./{{food_items[0][3]}}/create_food_item"
+    href="./{{menu_id}}/create_food_item"
     class="d-flex justify-content-center btn btn-light btn-sm"
     >Add Food Item</a
 >
 <hr />
 <!-- iterate over food items result set and display info -->
-{% for f_row in food_items | batch(3, '&nbsp')%}
+{% if food_items %}
 <div class="row">
     {% for f in food_items %}
     <div class="col-lg-4">
@@ -24,13 +24,10 @@
                 <h4>Name: {{f[1]}}</h4>
                 <h5>Price: ${{f[2]}}</h5>
                 <div class="d-flex justify-content-around mt-3">
-                    <form action="./edit_food_item" method="post">
-                        <input
-                            type="hidden"
-                            name="id"
-                            class="form-control"
-                            value="{{f[0]}}"
-                        />
+                    <form
+                        action="./{{f[3]}}/edit_food_item/{{f[0]}}"
+                        method="post"
+                    >
                         <input
                             class="btn btn-light"
                             type="submit"
@@ -53,4 +50,4 @@
     </div>
     {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+{% endif %} {% endblock %}

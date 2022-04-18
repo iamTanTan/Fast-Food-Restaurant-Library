@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, FloatField, TimeField, SelectField)
+from wtforms import (StringField, TextAreaField, FloatField, TimeField, SelectField, IntegerField)
 from wtforms.validators import InputRequired, Length
 
 class RestaurantForm(FlaskForm):
