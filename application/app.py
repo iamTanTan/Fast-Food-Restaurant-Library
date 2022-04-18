@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect
-import os
+import environ
 import psycopg2
 from forms import RestaurantForm, MenuForm, ReviewForm, FoodItemForm, HoursForm
 from credentials import DB_URL
@@ -7,6 +7,9 @@ from credentials import DB_URL
 app = Flask(__name__)
 
 # YOU NEED TO ADD THE credentials.py file from google drive
+env = environ.Env()
+if env.get('DB_URL') is not None:
+    DB_URL = env.get('DB_URL')
 app.config['DB_URL'] = DB_URL
 app.config['SECRET_KEY'] = 'asldfkhalsdr9023875934etQAR93123BEIAWUGAFVBEA9ERTHQP4'
 
