@@ -320,6 +320,15 @@ def reset():
 
     return redirect('/')
 
+@app.route('/set')
+def reset():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute(open("schema.sql", "r").read())
+    close_db_connection(conn, cur)
+
+    return redirect('/')
+
 
 ###########################################################################################################################
 if __name__ == '__main__':
