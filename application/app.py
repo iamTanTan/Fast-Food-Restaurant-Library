@@ -321,7 +321,7 @@ def reset():
     return redirect('/')
 
 @app.route('/set')
-def reset():
+def set():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute(open("schema.sql", "r").read())
