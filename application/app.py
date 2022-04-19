@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect
 import os
 import psycopg2
 from forms import RestaurantForm, MenuForm, ReviewForm, FoodItemForm, HoursForm
-from credentials import DB_URL
+#from credentials import DB_URL
 
 app = Flask(__name__)
 
